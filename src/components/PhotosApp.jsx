@@ -1,75 +1,77 @@
 import { useState } from 'react';
-import { X, Minus, Square, ChevronRight, Grid3x3, Heart, Clock, Map, Video, Camera, Users, Trash2, Share2, FolderOpen } from 'lucide-react';
+import { X, Minus, Square, ChevronRight, Grid3x3, Heart, Clock, Map, Video, Camera, Users, Trash2, Share2, FolderOpen, ChevronLeft } from 'lucide-react';
 
 const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
   const [selectedSection, setSelectedSection] = useState('library');
   const [selectedCollection, setSelectedCollection] = useState(null);
   const [isMaximized, setIsMaximized] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(null);
+  const [lightboxImages, setLightboxImages] = useState([]);
 
   // 10 project collections with their images
   const collections = [
     { 
       id: 1, 
-      name: 'E-Commerce Platform', 
+      name: 'Obys Agency Clone', 
       folder: 'project1',
       description: 'Full-stack e-commerce application with cart and checkout',
-      images: [] // Add your images: ['image1.png', 'image2.jpg', ...]
+      images: ['Obys1.png', 'Obys2.png', 'Obys3.png', 'Obys4.png', 'Obys5.png', 'Obys6.png', 'Obys7.png']
     },
     { 
       id: 2, 
-      name: 'Social Media Dashboard', 
+      name: 'Referral Management System', 
       folder: 'project2',
       description: 'Analytics dashboard for social media metrics',
-      images: []
+      images: ['Referral1.png', 'Referral2.png', 'Referral3.png', 'Referral4.png', 'Referral5.png', 'Referral6.png', 'Referral7.png', 'Referral8.png']
     },
     { 
       id: 3, 
-      name: 'Weather App', 
+      name: 'Student Achievement Management System', 
       folder: 'project3',
       description: 'Real-time weather application with forecasts',
-      images: []
+      images: ['Student1.png', 'Student2.png', 'Student3.png', 'Student4.png', 'Student5.png', 'Student6.png', 'Student7.png', 'Student8.png', 'Student9.png', 'Student10.png', 'Student11.png', 'Student12.png', 'Student13.png', 'Student14.png', 'Student15.png', 'Student16.png', 'Student17.png', 'Student18.png', 'Student19.png', 'Student20.png']
     },
     { 
       id: 4, 
-      name: 'Task Manager', 
+      name: 'Lead Management System', 
       folder: 'project4',
       description: 'Productivity app for managing tasks and projects',
-      images: []
+      images: ['Lead1.png', 'Lead2.png', 'Lead3.png', 'Lead4.png', 'Lead5.png', 'Lead6.png', 'Lead7.png']
     },
     { 
       id: 5, 
-      name: 'Portfolio Website', 
+      name: 'Binance Future Trading Bot', 
       folder: 'project5',
       description: 'Personal portfolio showcasing projects and skills',
-      images: []
+      images: ['Binance1.png', 'Binance2.png', 'Binance3.png', 'Binance4.png', 'Binance5.png', 'Binance6.png', 'Binance7.png', 'Binance8.png', 'Binance9.png']
     },
     { 
       id: 6, 
-      name: 'Chat Application', 
+      name: 'Calendar Management App', 
       folder: 'project6',
       description: 'Real-time messaging application',
-      images: []
+      images: ['Calender1.png', 'Calender2.png', 'Calender3.png', 'Calender4.png', 'Calender5.png']
     },
     { 
       id: 7, 
-      name: 'Blog Platform', 
+      name: 'Omnifood Landing Page', 
       folder: 'project7',
       description: 'Content management system for blogging',
-      images: []
+      images: ['Omnifood1.png', 'Omnifood2.png', 'Omnifood3.png', 'Omnifood4.png', 'Omnifood5.png', 'Omnifood6.png', 'Omnifood7.png', 'Omnifood8.png']
     },
     { 
       id: 8, 
-      name: 'Music Player', 
+      name: 'Event Booking App', 
       folder: 'project8',
       description: 'Streaming music player with playlists',
-      images: []
+      images: ['Event1.png', 'Event2.png', 'Event3.png', 'Event4.png', 'Event5.png', 'Event6.png', 'Event7.png', 'Event8.png', 'Event9.png']
     },
     { 
       id: 9, 
-      name: 'Fitness Tracker', 
+      name: 'Rodas Architect Website Landing Page', 
       folder: 'project9',
       description: 'Health and fitness tracking application',
-      images: []
+      images: ['Rodas1.png', 'Rodas2.png', 'Rodas3.png', 'Rodas4.png', 'Rodas5.png', 'Rodas6.png', 'Rodas7.png', 'Rodas8.png', 'Rodas9.png', 'Rodas10.png', 'Rodas11.png', 'Rodas12.png', 'Rodas13.png']
     },
     { 
       id: 10, 
@@ -85,19 +87,41 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
     if (!collection || !collection.images || collection.images.length === 0) {
       return [];
     }
-    return collection.images.map((img, index) => ({
+    // Sort images naturally (Obys1, Obys2, ... Obys10)
+    const sortedImages = [...collection.images].sort((a, b) => {
+      return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+    });
+    return sortedImages.map((img, index) => ({
       id: index + 1,
       url: `/assets/images/projects/${collection.folder}/${img}`,
       name: img
     }));
   };
 
-  // Random library photos (placeholder images)
-  const libraryPhotos = Array.from({ length: 24 }, (_, i) => ({
-    id: i + 1,
-    url: `https://picsum.photos/400/300?random=${i + 1}`,
-    date: new Date(2025, 0, Math.floor(Math.random() * 30) + 1).toLocaleDateString()
-  }));
+  // Library photos - collect all images from all collections
+  const libraryPhotos = (() => {
+    const allImages = [];
+    collections.forEach((collection) => {
+      if (collection.images && collection.images.length > 0) {
+        collection.images.forEach((img) => {
+          allImages.push({
+            url: `/assets/images/projects/${collection.folder}/${img}`,
+            name: img,
+            collection: collection.name
+          });
+        });
+      }
+    });
+    // Shuffle the images for variety
+    const shuffled = allImages.sort(() => Math.random() - 0.5);
+    return shuffled.map((img, index) => ({
+      id: index + 1,
+      url: img.url,
+      name: img.name,
+      collection: img.collection,
+      date: new Date(2025, 0, Math.floor(Math.random() * 30) + 1).toLocaleDateString()
+    }));
+  })();
 
   if (isMinimized) return null;
 
@@ -242,13 +266,18 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
                   {libraryPhotos.map((photo) => (
                     <div
                       key={photo.id}
+                      onClick={() => {
+                        setLightboxImage(photo);
+                        setLightboxImages(libraryPhotos);
+                      }}
                       className="aspect-square rounded-sm overflow-hidden bg-gray-900 hover:ring-2 hover:ring-[#0a84ff] transition-all cursor-pointer group relative"
                     >
                       <img
                         src={photo.url}
                         alt={`Photo ${photo.id}`}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                        loading="lazy"
+                        loading={photo.id <= 12 ? "eager" : "lazy"}
+                        decoding="async"
                       />
                       {/* Hover overlay */}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none" />
@@ -260,13 +289,18 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
                   {getCollectionImages(selectedCollection).map((photo) => (
                     <div
                       key={photo.id}
+                      onClick={() => {
+                        setLightboxImage(photo);
+                        setLightboxImages(getCollectionImages(selectedCollection));
+                      }}
                       className="aspect-square rounded-sm overflow-hidden bg-gray-900 hover:ring-2 hover:ring-[#0a84ff] transition-all cursor-pointer group relative"
                     >
                       <img
                         src={photo.url}
                         alt={photo.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                        loading="lazy"
+                        loading={photo.id <= 12 ? "eager" : "lazy"}
+                        decoding="async"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none" />
                     </div>
@@ -295,6 +329,71 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div className="fixed inset-0 z-[70] bg-black/95 flex items-center justify-center" onClick={() => setLightboxImage(null)}>
+          <button
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* Previous Button */}
+          {lightboxImages.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                const currentIndex = lightboxImages.findIndex(img => img.id === lightboxImage.id);
+                const prevIndex = currentIndex > 0 ? currentIndex - 1 : lightboxImages.length - 1;
+                setLightboxImage(lightboxImages[prevIndex]);
+              }}
+              className="absolute left-4 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+          )}
+
+          {/* Next Button */}
+          {lightboxImages.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                const currentIndex = lightboxImages.findIndex(img => img.id === lightboxImage.id);
+                const nextIndex = currentIndex < lightboxImages.length - 1 ? currentIndex + 1 : 0;
+                setLightboxImage(lightboxImages[nextIndex]);
+              }}
+              className="absolute right-4 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          )}
+
+          {/* Image */}
+          <div className="max-w-[90vw] max-h-[90vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={lightboxImage.url}
+              alt={lightboxImage.name || `Photo ${lightboxImage.id}`}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+
+          {/* Image Info */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full">
+            <p className="text-white text-sm">
+              {lightboxImage.name || `Photo ${lightboxImage.id}`}
+              {lightboxImages.length > 1 && (
+                <span className="text-gray-400 ml-2">
+                  {lightboxImages.findIndex(img => img.id === lightboxImage.id) + 1} / {lightboxImages.length}
+                </span>
+              )}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

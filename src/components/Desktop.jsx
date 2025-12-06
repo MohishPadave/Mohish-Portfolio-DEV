@@ -49,12 +49,11 @@ const Desktop = ({ onLogout }) => {
   }, []);
 
   const desktopIcons = [
-    { id: 1, name: 'About Me', icon: 'https://img.icons8.com/?size=100&id=jHteWfDDRFlK&format=png&color=000000', type: 'folder' },
+    { id: 1, name: 'Interactive Portfolio', icon: 'https://img.icons8.com/?size=100&id=jHteWfDDRFlK&format=png&color=000000', type: 'folder' },
     { id: 2, name: 'LinkedIn', icon: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png', type: 'link', url: 'https://www.linkedin.com/in/mohish-padave' },
     { id: 3, name: 'GitHub', icon: 'https://cdn-icons-png.flaticon.com/512/25/25231.png', type: 'link', url: 'https://github.com/MohishPadave' },
     { id: 4, name: 'Tech Stack', icon: 'https://img.icons8.com/?size=100&id=jHteWfDDRFlK&format=png&color=000000', type: 'folder' },
     { id: 5, name: 'My Resume', icon: 'https://cdn-icons-png.flaticon.com/512/337/337946.png', type: 'resume' },
-    { id: 6, name: 'My Projects', icon: 'https://img.icons8.com/?size=100&id=jHteWfDDRFlK&format=png&color=000000', type: 'folder' },
   ];
 
   const handleIconClick = (icon) => {

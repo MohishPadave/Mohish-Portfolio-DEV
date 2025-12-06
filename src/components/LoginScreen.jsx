@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
-const LoginScreen = ({ onLogin }) => {
+const LoginScreen = ({ onLogin, isVisible }) => {
   const timeRef = useRef(null);
   const dateRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -29,15 +29,22 @@ const LoginScreen = ({ onLogin }) => {
     updateTime();
     const interval = setInterval(updateTime, 1000);
 
+    return () => clearInterval(interval);
+  }, []);
+
+  // Trigger animations only when visible
+  useEffect(() => {
+    if (!isVisible) return;
+
     gsap.fromTo('.login-content', 
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 1, delay: 0.3 }
     );
 
     // Show password field after a short delay
-    setTimeout(() => {
+    const passwordTimeout = setTimeout(() => {
       setShowPassword(true);
-      // Animate password dots one by one
+      // Animate password dots one by one with smooth timing
       let dotCount = 0;
       const dotInterval = setInterval(() => {
         dotCount++;
@@ -45,11 +52,11 @@ const LoginScreen = ({ onLogin }) => {
         if (dotCount >= 8) {
           clearInterval(dotInterval);
         }
-      }, 150);
-    }, 800);
+      }, 200);
+    }, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearTimeout(passwordTimeout);
+  }, [isVisible]);
 
   const handleLogin = () => {
     gsap.to('.login-content', {
