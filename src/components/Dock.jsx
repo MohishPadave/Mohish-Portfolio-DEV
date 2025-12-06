@@ -81,7 +81,7 @@ const Dock = ({ onOpenSpotify, previewOpen, onOpenPreview }) => {
       <div 
         className="dock fixed left-0 right-0 z-50 pointer-events-none"
         style={{
-          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 4rem)',
+          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 3.5rem)',
         }}
       >
         <div className="flex justify-center px-2 pointer-events-auto">

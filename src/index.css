@@ -152,8 +152,8 @@ input[type="range"]::-moz-range-thumb {
 /* Mobile-specific dock positioning */
 @media (max-width: 768px) {
   .dock {
-    /* Position dock well above browser UI bars */
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 4rem) !important;
+    /* Position dock above browser UI bars - balanced for both browsers */
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 3.5rem) !important;
   }
 }
 
@@ -166,8 +166,8 @@ input[type="range"]::-moz-range-thumb {
   
   @media (max-width: 768px) {
     .dock {
-      /* Extra spacing for iOS Safari tab bar */
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 5rem) !important;
+      /* Moderate spacing for iOS Safari tab bar - not too high */
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 3.75rem) !important;
     }
   }
 }
@@ -176,8 +176,8 @@ input[type="range"]::-moz-range-thumb {
 @supports not (-webkit-touch-callout: none) {
   @media (max-width: 768px) {
     .dock {
-      /* Extra spacing for Chrome navigation bar */
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 4.5rem) !important;
+      /* Slightly more spacing for Chrome navigation bar */
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 4rem) !important;
     }
   }
 }
