@@ -144,23 +144,31 @@ input[type="range"]::-moz-range-thumb {
 
 /* Dock visibility and safe area support */
 .dock {
-  /* Ensure dock is always visible above safe areas on mobile */
-  padding-bottom: env(safe-area-inset-bottom, 0.5rem);
   /* Prevent dock from being hidden by browser UI */
   position: fixed !important;
   z-index: 50 !important;
 }
 
+/* Mobile-specific dock positioning */
+@media (max-width: 768px) {
+  .dock {
+    /* Position dock well above browser UI bars */
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 4rem) !important;
+  }
+}
+
 /* iOS Safari specific fixes */
 @supports (-webkit-touch-callout: none) {
-  .dock {
-    /* Extra padding for iOS home indicator */
-    padding-bottom: max(env(safe-area-inset-bottom), 0.5rem);
-  }
-  
   /* Ensure full viewport height on iOS */
   html, body, #root {
     height: -webkit-fill-available;
+  }
+  
+  @media (max-width: 768px) {
+    .dock {
+      /* Extra spacing for iOS Safari tab bar */
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 5rem) !important;
+    }
   }
 }
 
@@ -168,8 +176,8 @@ input[type="range"]::-moz-range-thumb {
 @supports not (-webkit-touch-callout: none) {
   @media (max-width: 768px) {
     .dock {
-      /* Ensure visibility on Chrome mobile */
-      padding-bottom: max(env(safe-area-inset-bottom), 0.75rem);
+      /* Extra spacing for Chrome navigation bar */
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 4.5rem) !important;
     }
   }
 }

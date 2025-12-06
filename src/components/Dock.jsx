@@ -81,12 +81,12 @@ const Dock = ({ onOpenSpotify, previewOpen, onOpenPreview }) => {
       <div 
         className="dock fixed left-0 right-0 z-50 pointer-events-none"
         style={{
-          bottom: 'max(0.5rem, env(safe-area-inset-bottom))',
+          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 4rem)',
         }}
       >
         <div className="flex justify-center px-2 pointer-events-auto">
-          <div className="bg-white/10 backdrop-blur-3xl rounded-2xl sm:rounded-[24px] px-3 sm:px-4 py-2 sm:py-3 border border-white/20 shadow-2xl">
-            <div className="flex items-end gap-2 sm:gap-3 relative">
+          <div className="bg-white/10 backdrop-blur-3xl rounded-2xl sm:rounded-[24px] px-2 sm:px-4 py-1.5 sm:py-3 border border-white/20 shadow-2xl">
+            <div className="flex items-end gap-1.5 sm:gap-3 relative">
             {dockApps.map((app) => (
             <div
               key={app.id}
@@ -119,7 +119,7 @@ const Dock = ({ onOpenSpotify, previewOpen, onOpenPreview }) => {
               
               {/* App Icon */}
               <div 
-                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center cursor-pointer transition-transform duration-300 overflow-hidden bg-transparent"
+                className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center cursor-pointer transition-transform duration-300 overflow-hidden bg-transparent active:scale-95"
                 onClick={() => handleAppClick(app.id)}
               >
                 <img 
