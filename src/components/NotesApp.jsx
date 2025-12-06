@@ -22,9 +22,27 @@ const NotesApp = ({ onClose }) => {
             </h1>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" alt="Profile 1" className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg" />
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Profile 2" className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg" />
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop" alt="Profile 3" className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg" />
+              <img 
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" 
+                alt="Profile 1" 
+                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
+                loading="lazy"
+                decoding="async"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" 
+                alt="Profile 2" 
+                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
+                loading="lazy"
+                decoding="async"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop" 
+                alt="Profile 3" 
+                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
 
             <div className="space-y-4 sm:space-y-6">

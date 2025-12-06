@@ -21,7 +21,14 @@ const DesktopIcon = ({ icon, onClick, delay }) => {
     >
       <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg flex items-center justify-center text-2xl sm:text-3xl group-hover:bg-white/10 transition-all">
         {isImageIcon ? (
-          <img src={icon.icon} alt={icon.name} className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain drop-shadow-lg" />
+          <img 
+            src={icon.icon} 
+            alt={icon.name} 
+            className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain drop-shadow-lg"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
         ) : (
           <span className="drop-shadow-lg">{icon.icon}</span>
         )}

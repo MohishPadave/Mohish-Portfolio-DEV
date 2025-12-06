@@ -63,7 +63,13 @@ const ControlCenter = ({ isOpen, onClose, onBrightnessChange, onOpenSpotify }) =
               className="bg-white/10 backdrop-blur-2xl rounded-2xl p-4 border border-white/15 hover:scale-[1.02] transition-all flex items-center justify-center"
               style={{ backdropFilter: 'blur(20px) saturate(180%)' }}
             >
-              <img src="https://help.apple.com/assets/63D45E11F9097E597B0AB0B4/63D45E14F9097E597B0AB0BB/en_US/a96aabc0fc31064af337f0e8424a8ebc.png" alt="Safari" className="w-12 h-12" />
+              <img 
+                src="https://help.apple.com/assets/63D45E11F9097E597B0AB0B4/63D45E14F9097E597B0AB0BB/en_US/a96aabc0fc31064af337f0e8424a8ebc.png" 
+                alt="Safari" 
+                className="w-12 h-12"
+                loading="lazy"
+                decoding="async"
+              />
             </button>
           </div>
 

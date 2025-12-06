@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X, Minus, Square, ChevronRight, Grid3x3, Heart, Clock, Map, Video, Camera, Users, Trash2, Share2, FolderOpen, ChevronLeft } from 'lucide-react';
 
 const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
@@ -7,6 +7,7 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
   const [isMaximized, setIsMaximized] = useState(false);
   const [lightboxImage, setLightboxImage] = useState(null);
   const [lightboxImages, setLightboxImages] = useState([]);
+  const observerRef = useRef(null);
 
   // 10 project collections with their images
   const collections = [
@@ -122,6 +123,33 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
       date: new Date(2025, 0, Math.floor(Math.random() * 30) + 1).toLocaleDateString()
     }));
   })();
+
+  // Setup Intersection Observer for lazy loading
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.dataset.src;
+            if (src) {
+              img.src = src;
+              img.removeAttribute('data-src');
+              observerRef.current?.unobserve(img);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '50px',
+        threshold: 0.01
+      }
+    );
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, []);
 
   if (isMinimized) return null;
 
@@ -263,7 +291,7 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
             <div className="p-2 sm:p-3 md:p-4">
               {selectedSection === 'library' ? (
                 <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-0.5 sm:gap-1">
-                  {libraryPhotos.map((photo) => (
+                  {libraryPhotos.map((photo, index) => (
                     <div
                       key={photo.id}
                       onClick={() => {
@@ -276,8 +304,9 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
                         src={photo.url}
                         alt={`Photo ${photo.id}`}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                        loading={photo.id <= 12 ? "eager" : "lazy"}
+                        loading={index < 18 ? "eager" : "lazy"}
                         decoding="async"
+                        fetchpriority={index < 6 ? "high" : "auto"}
                       />
                       {/* Hover overlay */}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none" />
@@ -286,7 +315,7 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
                 </div>
               ) : selectedCollection && getCollectionImages(selectedCollection).length > 0 ? (
                 <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-0.5 sm:gap-1">
-                  {getCollectionImages(selectedCollection).map((photo) => (
+                  {getCollectionImages(selectedCollection).map((photo, index) => (
                     <div
                       key={photo.id}
                       onClick={() => {
@@ -299,8 +328,9 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
                         src={photo.url}
                         alt={photo.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                        loading={photo.id <= 12 ? "eager" : "lazy"}
+                        loading={index < 18 ? "eager" : "lazy"}
                         decoding="async"
+                        fetchpriority={index < 6 ? "high" : "auto"}
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none" />
                     </div>

@@ -8,6 +8,23 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDesktop, setShowDesktop] = useState(false);
 
+  // Preload critical images
+  useEffect(() => {
+    const preloadImages = [
+      '/assets/images/landing.png',
+      '/assets/images/Login.png'
+    ];
+
+    preloadImages.forEach(src => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      link.fetchPriority = 'high';
+      document.head.appendChild(link);
+    });
+  }, []);
+
   // Hide initial HTML loader once React is ready
   useEffect(() => {
     const initialLoader = document.getElementById('initial-loader');
@@ -30,16 +47,16 @@ function App() {
       
       {/* Background image for desktop screen - hidden until logged in */}
       <div 
-        className={`absolute top-0 left-0 w-full h-full z-0 transition-all duration-1000 ease-out ${isLoggedIn ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+        className={`absolute top-0 left-0 w-full h-full z-0 transition-all duration-1000 ease-out ${isLoggedIn ? 'opacity-100 scale-100' : 'opacity-0 scale-105 invisible'}`}
         style={{
-          backgroundImage: `url('/assets/images/landing.png')`,
+          backgroundImage: isLoggedIn ? `url('/assets/images/landing.png')` : 'none',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       />
       
       {/* Login Screen - render immediately but keep hidden during loading */}
-      <div className={`absolute inset-0 transition-opacity duration-700 ease-in-out z-10 ${isLoading ? 'opacity-0' : isLoggedIn ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`absolute inset-0 transition-opacity duration-700 ease-in-out z-10 bg-black ${isLoading ? 'opacity-0' : isLoggedIn ? 'opacity-0 pointer-events-none invisible' : 'opacity-100'}`}>
         <LoginScreen onLogin={handleLogin} isVisible={!isLoading && !isLoggedIn} />
       </div>
       
