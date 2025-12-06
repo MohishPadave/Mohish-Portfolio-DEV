@@ -69,7 +69,7 @@ const LoginScreen = ({ onLogin, isVisible }) => {
   };
 
   return (
-    <div className="login-screen w-screen h-screen fixed inset-0 overflow-hidden">
+    <div className="login-screen w-screen h-screen fixed inset-0 overflow-hidden bg-black">
       {/* Background video for login screen */}
       <video 
         autoPlay 
@@ -83,19 +83,21 @@ const LoginScreen = ({ onLogin, isVisible }) => {
           minHeight: '100%',
           width: '100%',
           height: '100%',
-          objectFit: 'cover'
+          objectFit: 'cover',
+          backgroundColor: '#000000'
         }}
       >
         <source src="/assets/videos/Tahoe Day.mov" type="video/mp4" />
       </video>
       
-      {/* Fallback image for login screen */}
+      {/* Fallback image for login screen - only show if video fails to load */}
       <div 
-        className="absolute top-0 left-0 w-full h-full -z-10"
+        className="absolute top-0 left-0 w-full h-full -z-10 bg-black"
         style={{
           backgroundImage: `url('/assets/images/Login.png')`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
+          opacity: 0.95
         }}
       />
       

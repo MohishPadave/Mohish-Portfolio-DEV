@@ -78,9 +78,15 @@ const Dock = ({ onOpenSpotify, previewOpen, onOpenPreview }) => {
       {finderOpen && <FinderWindow onClose={() => setFinderOpen(false)} onOpenPreview={onOpenPreview} />}
       {notesOpen && <NotesApp onClose={() => setNotesOpen(false)} />}
       
-      <div className="dock absolute bottom-1 sm:bottom-2 left-1/2 -translate-x-1/2 z-50">
-        <div className="bg-white/10 backdrop-blur-3xl rounded-2xl sm:rounded-[24px] px-3 sm:px-4 py-2 sm:py-3 border border-white/20 shadow-2xl">
-          <div className="flex items-end gap-2 sm:gap-3 relative">
+      <div 
+        className="dock fixed left-0 right-0 z-50 pointer-events-none"
+        style={{
+          bottom: 'max(0.5rem, env(safe-area-inset-bottom))',
+        }}
+      >
+        <div className="flex justify-center px-2 pointer-events-auto">
+          <div className="bg-white/10 backdrop-blur-3xl rounded-2xl sm:rounded-[24px] px-3 sm:px-4 py-2 sm:py-3 border border-white/20 shadow-2xl">
+            <div className="flex items-end gap-2 sm:gap-3 relative">
             {dockApps.map((app) => (
             <div
               key={app.id}
@@ -120,10 +126,14 @@ const Dock = ({ onOpenSpotify, previewOpen, onOpenPreview }) => {
                   src={app.icon} 
                   alt={app.name} 
                   className={`${app.id === 3 ? 'w-[120%] h-[120%] object-cover' : 'w-full h-full object-cover'}`}
+                  loading="eager"
+                  decoding="async"
+                  fetchpriority="high"
                 />
               </div>
             </div>
           ))}
+            </div>
           </div>
         </div>
       </div>
