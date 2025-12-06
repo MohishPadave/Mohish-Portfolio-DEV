@@ -1,124 +1,48 @@
 import { useState } from 'react';
 
 const NotesApp = ({ onClose }) => {
-  const [activeTab, setActiveTab] = useState('I\'m Steve');
+  const [activeTab, setActiveTab] = useState('About Me');
   const [isMaximized, setIsMaximized] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
 
   const tabs = [
-    { id: 'I\'m Steve', name: 'I\'m Steve' },
-    { id: 'What I Offer', name: 'What I Offer' },
-    { id: 'Awards & Press', name: 'Awards & Press' },
-    { id: 'Clients', name: 'Clients' },
+    { id: 'About Me', name: 'About Me' },
   ];
 
   const getContent = () => {
     switch (activeTab) {
-      case 'I\'m Steve':
+      case 'About Me':
         return (
-          <div className="p-4 sm:p-6 md:p-8">
-            <h1 className="text-xl sm:text-2xl md:text-3xl mb-4 sm:mb-6">
-              Hello, my name is <span className="text-blue-500 font-semibold">Steve</span> — I'm a <span className="text-red-400 font-semibold">creative designer.</span>
-            </h1>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
-              <img 
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" 
-                alt="Profile 1" 
-                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
-                loading="lazy"
-                decoding="async"
-              />
-              <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" 
-                alt="Profile 2" 
-                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
-                loading="lazy"
-                decoding="async"
-              />
-              <img 
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop" 
-                alt="Profile 3" 
-                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-
-            <div className="space-y-4 sm:space-y-6">
-              <div>
-                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3">What I Do</h2>
-                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                  I craft websites, visual identities, and interactive projects that are both beautiful and user-friendly. My work focuses on translating complex ideas into clear, engaging experiences.
+          <div className="p-4 sm:p-6 md:p-8 lg:p-12 w-full flex justify-center">
+            <div className="w-full max-w-4xl">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-light mb-6 sm:mb-8 text-gray-900">
+                About Me
+              </h1>
+              
+              <div className="space-y-5 sm:space-y-6 text-gray-700 leading-relaxed text-justify">
+                <p className="text-sm sm:text-base md:text-lg w-full">
+                  I'm <span className="font-semibold text-gray-900">Mohish Padave</span>, and my journey into software wasn't sparked by a textbook or a classroom, it began with a quiet fascination for how things work. I've always been drawn to moments where something complex suddenly feels simple, where a screen responds in just the right way, where a product understands you before you even ask.
                 </p>
-              </div>
 
-              <div>
-                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3">My Approach</h2>
-                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                  I believe design should tell a story and solve problems. I start by understanding the user and project goals, then iterate concepts until I find the perfect balance of form and function.
+                <p className="text-sm sm:text-base md:text-lg w-full">
+                  That feeling of clarity, of connection, of intention is what made me fall in love with building digital experiences.
                 </p>
-              </div>
 
-              <div>
-                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3">Social</h2>
-                <div className="space-y-2">
-                  <a href="#" className="text-blue-500 hover:underline block text-sm sm:text-base">Instagram</a>
-                  <a href="#" className="text-blue-500 hover:underline block text-sm sm:text-base">X (Twitter)</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      case 'What I Offer':
-        return (
-          <div className="p-4 sm:p-6 md:p-8">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6">What I Offer</h1>
-            <div className="space-y-3 sm:space-y-4">
-              <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1 sm:mb-2">Web Design</h3>
-                <p className="text-sm sm:text-base text-gray-700">Creating beautiful and functional websites that engage users.</p>
-              </div>
-              <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1 sm:mb-2">Brand Identity</h3>
-                <p className="text-sm sm:text-base text-gray-700">Developing unique visual identities that tell your story.</p>
-              </div>
-              <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1 sm:mb-2">UI/UX Design</h3>
-                <p className="text-sm sm:text-base text-gray-700">Designing intuitive interfaces that users love.</p>
-              </div>
-            </div>
-          </div>
-        );
-      case 'Awards & Press':
-        return (
-          <div className="p-4 sm:p-6 md:p-8">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6">Awards & Press</h1>
-            <div className="space-y-3 sm:space-y-4">
-              <div className="border-l-4 border-blue-500 pl-3 sm:pl-4">
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold">Best Design Award 2023</h3>
-                <p className="text-sm sm:text-base text-gray-600">Awwwards - Site of the Day</p>
-              </div>
-              <div className="border-l-4 border-blue-500 pl-3 sm:pl-4">
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold">Featured Designer</h3>
-                <p className="text-sm sm:text-base text-gray-600">Design Magazine - Top 100 Designers</p>
-              </div>
-            </div>
-          </div>
-        );
-      case 'Clients':
-        return (
-          <div className="p-4 sm:p-6 md:p-8">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6">Clients</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-              <div className="text-center p-4 sm:p-5 md:p-6 bg-gray-50 rounded-lg">
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold">Apple</h3>
-              </div>
-              <div className="text-center p-4 sm:p-5 md:p-6 bg-gray-50 rounded-lg">
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold">Google</h3>
-              </div>
-              <div className="text-center p-4 sm:p-5 md:p-6 bg-gray-50 rounded-lg">
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold">Microsoft</h3>
+                <p className="text-sm sm:text-base md:text-lg w-full">
+                  For me, technology isn't just code or systems. It's a bridge between people and possibilities. It's a way to remove friction from someone's day, a way to give shape to ideas that were once abstract, a way to make someone feel understood. Every project I take on is a chance to create that moment for someone else, the moment where everything just clicks.
+                </p>
+
+                <p className="text-sm sm:text-base md:text-lg w-full">
+                  As I've grown, so has my approach. I've learned to listen before I build, to understand the story behind the problem, and to design solutions that respect the user's time, attention, and emotions. I care deeply about the experience, the intention behind each decision, and the quiet details that most people never see but always feel.
+                </p>
+
+                <p className="text-sm sm:text-base md:text-lg w-full">
+                  What I'm seeking now is simple: a place where my curiosity can meet purpose. A team that values thoughtful design, honest work, and ideas that make a difference. A space where I can contribute, learn, and grow, not just as an engineer, but as someone who builds with heart.
+                </p>
+
+                <p className="text-sm sm:text-base md:text-lg font-medium text-gray-900 w-full">
+                  If you're looking for someone who brings passion, empathy, and intention to their craft, I'd love to be part of your story.
+                </p>
               </div>
             </div>
           </div>
@@ -181,7 +105,7 @@ const NotesApp = ({ onClose }) => {
         {/* Sidebar */}
         <div className="w-32 sm:w-48 md:w-56 lg:w-64 bg-gray-100 border-r border-gray-200 pt-12 sm:pt-16 pb-3 sm:pb-4 flex-shrink-0">
           <div className="px-2 sm:px-3 md:px-4 mb-2 sm:mb-3 md:mb-4">
-            <h2 className="text-gray-500 text-[10px] sm:text-xs md:text-sm font-semibold mb-1.5 sm:mb-2 md:mb-3">About me</h2>
+            <h2 className="text-gray-500 text-[10px] sm:text-xs md:text-sm font-semibold mb-1.5 sm:mb-2 md:mb-3">Notes</h2>
           </div>
           <div className="space-y-0.5 sm:space-y-1">
             {tabs.map((tab) => (

@@ -161,9 +161,39 @@ const PhotosApp = ({ onClose, onMinimize, isMinimized }) => {
         {/* Title Bar */}
         <div className="bg-[#28282a] px-4 py-2.5 flex items-center justify-between border-b border-black/40">
           <div className="flex items-center gap-2">
-            <button onClick={onClose} className="window-control w-3 h-3 rounded-full bg-[#ff5f57] hover:bg-[#ff4136] transition-colors" />
-            <button onClick={onMinimize} className="window-control w-3 h-3 rounded-full bg-[#febc2e] hover:bg-[#ffb700] transition-colors" />
-            <button onClick={() => setIsMaximized(!isMaximized)} className="window-control w-3 h-3 rounded-full bg-[#28c840] hover:bg-[#00d924] transition-colors" />
+            <button 
+              onClick={onClose} 
+              className="window-control w-3 h-3 rounded-full bg-[#ff5f57] hover:bg-[#ff4136] transition-colors group relative"
+              title="Close"
+            >
+              <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg className="w-2 h-2 text-black/60" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="2">
+                  <path d="M2 2l8 8M10 2l-8 8" />
+                </svg>
+              </span>
+            </button>
+            <button 
+              onClick={onMinimize} 
+              className="window-control w-3 h-3 rounded-full bg-[#febc2e] hover:bg-[#ffb700] transition-colors group relative"
+              title="Minimize"
+            >
+              <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg className="w-2 h-2 text-black/60" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="2">
+                  <path d="M2 6h8" />
+                </svg>
+              </span>
+            </button>
+            <button 
+              onClick={() => setIsMaximized(!isMaximized)} 
+              className="window-control w-3 h-3 rounded-full bg-[#28c840] hover:bg-[#00d924] transition-colors group relative"
+              title="Maximize"
+            >
+              <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg className="w-2 h-2 text-black/60" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M2 2h3v3M10 10H7V7M10 2H7v3M2 10h3V7" />
+                </svg>
+              </span>
+            </button>
           </div>
           <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
             <Camera className="w-4 h-4 text-gray-400" />

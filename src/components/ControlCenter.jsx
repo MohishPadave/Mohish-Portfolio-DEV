@@ -9,6 +9,8 @@ const ControlCenter = ({ isOpen, onClose, onBrightnessChange, onOpenSpotify }) =
   const [isPlaying, setIsPlaying] = useState(false);
   const [focusMode, setFocusMode] = useState(false);
   const [screenMirroring, setScreenMirroring] = useState(false);
+  const [stageManager, setStageManager] = useState(false);
+  const [screenCapture, setScreenCapture] = useState(false);
 
   const handleBrightnessChange = (value) => {
     setBrightness(value);
@@ -64,12 +66,37 @@ const ControlCenter = ({ isOpen, onClose, onBrightnessChange, onOpenSpotify }) =
               style={{ backdropFilter: 'blur(20px) saturate(180%)' }}
             >
               <img 
-                src="https://help.apple.com/assets/63D45E11F9097E597B0AB0B4/63D45E14F9097E597B0AB0BB/en_US/a96aabc0fc31064af337f0e8424a8ebc.png" 
+                src="/assets/images/safari.png" 
                 alt="Safari" 
                 className="w-12 h-12"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
+                fetchpriority="high"
               />
+            </button>
+          </div>
+
+          {/* Focus Mode Row */}
+          <div className="mb-3">
+            <button
+              onClick={() => setFocusMode(!focusMode)}
+              className={`w-full ${focusMode ? 'bg-blue-500/70' : 'bg-white/10'} backdrop-blur-2xl rounded-2xl p-4 border border-white/15 hover:scale-[1.02] transition-all`}
+              style={{ backdropFilter: 'blur(20px) saturate(180%)' }}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-12 h-12 ${focusMode ? 'bg-white' : 'bg-blue-500'} rounded-full flex items-center justify-center shadow-md`}>
+                  <svg className={`w-7 h-7 ${focusMode ? 'text-blue-500' : 'text-white'}`} fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"/>
+                  </svg>
+                </div>
+                <div className="text-left flex-1">
+                  <div className="text-white font-semibold">Focus</div>
+                  <div className="text-white/80 text-sm">{focusMode ? 'Do Not Disturb' : 'Off'}</div>
+                </div>
+                <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"/>
+                </svg>
+              </div>
             </button>
           </div>
 
@@ -152,37 +179,42 @@ const ControlCenter = ({ isOpen, onClose, onBrightnessChange, onOpenSpotify }) =
           </div>
 
           {/* More Controls Row */}
-          <div className="grid grid-cols-4 gap-3 mb-3">
+          <div className="grid grid-cols-3 gap-3 mb-3">
+            {/* Screen Capture */}
             <button 
-              onClick={() => alert('Keyboard Brightness')}
-              className="bg-white/90 backdrop-blur-xl rounded-full w-16 h-16 flex items-center justify-center border border-white/20 hover:scale-105 transition-transform"
+              onClick={() => setScreenCapture(!screenCapture)}
+              className={`${screenCapture ? 'bg-blue-500/80' : 'bg-white/90'} backdrop-blur-xl rounded-full w-16 h-16 flex items-center justify-center border border-white/20 hover:scale-105 transition-transform`}
             >
-              <svg className="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+              <svg className={`w-8 h-8 ${screenCapture ? 'text-white' : 'text-blue-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 9V6a2 2 0 012-2h3" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M21 9V6a2 2 0 00-2-2h-3" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 15v3a2 2 0 002 2h3" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M21 15v3a2 2 0 01-2 2h-3" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
+            {/* Stage Manager */}
             <button 
-              onClick={() => alert('Stage Manager')}
-              className="bg-blue-500/80 backdrop-blur-xl rounded-full w-16 h-16 flex items-center justify-center border border-white/20 hover:scale-105 transition-transform"
+              onClick={() => setStageManager(!stageManager)}
+              className={`${stageManager ? 'bg-blue-500/80' : 'bg-white/90'} backdrop-blur-xl rounded-full w-16 h-16 flex items-center justify-center border border-white/20 hover:scale-105 transition-transform`}
             >
-              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4z"/>
+              <svg className={`w-8 h-8 ${stageManager ? 'text-white' : 'text-blue-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <rect x="3" y="5" width="10" height="12" rx="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <rect x="15" y="3" width="6" height="6" rx="1" strokeLinecap="round" strokeLinejoin="round"/>
+                <rect x="15" y="11" width="6" height="6" rx="1" strokeLinecap="round" strokeLinejoin="round"/>
+                <rect x="15" y="19" width="6" height="2" rx="0.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
+            {/* Screen Mirroring */}
             <button 
-              onClick={() => alert('Screen Sharing')}
-              className="bg-blue-500/80 backdrop-blur-xl rounded-full w-16 h-16 flex items-center justify-center border border-white/20 hover:scale-105 transition-transform"
+              onClick={() => setScreenMirroring(!screenMirroring)}
+              className={`${screenMirroring ? 'bg-blue-500/80' : 'bg-white/90'} backdrop-blur-xl rounded-full w-16 h-16 flex items-center justify-center border border-white/20 hover:scale-105 transition-transform`}
             >
-              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2 6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
-              </svg>
-            </button>
-            <button 
-              onClick={() => setFocusMode(!focusMode)}
-              className={`${focusMode ? 'bg-purple-500/80' : 'bg-gray-700/60'} backdrop-blur-xl rounded-full w-16 h-16 flex items-center justify-center border border-white/20 hover:scale-105 transition-transform`}
-            >
-              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+              <svg className={`w-8 h-8 ${screenMirroring ? 'text-white' : 'text-blue-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="4" width="20" height="12" rx="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M8 20h8" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 16v4" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M7 9l3 3 4-5" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
               </svg>
             </button>
           </div>

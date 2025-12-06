@@ -49,7 +49,7 @@ const Desktop = ({ onLogout }) => {
   }, []);
 
   const desktopIcons = [
-    { id: 1, name: 'Interactive Portfolio', icon: 'https://img.icons8.com/?size=100&id=jHteWfDDRFlK&format=png&color=000000', type: 'folder' },
+    { id: 1, name: 'Interactive Portfolio', icon: 'https://img.icons8.com/?size=100&id=jHteWfDDRFlK&format=png&color=000000', type: 'link', url: 'https://www.google.com' },
     { id: 2, name: 'LinkedIn', icon: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png', type: 'link', url: 'https://www.linkedin.com/in/mohish-padave' },
     { id: 3, name: 'GitHub', icon: 'https://cdn-icons-png.flaticon.com/512/25/25231.png', type: 'link', url: 'https://github.com/MohishPadave' },
     { id: 4, name: 'Tech Stack', icon: 'https://img.icons8.com/?size=100&id=jHteWfDDRFlK&format=png&color=000000', type: 'folder' },
@@ -98,6 +98,10 @@ const Desktop = ({ onLogout }) => {
         <MenuBar 
           onControlCenterClick={() => setControlCenterOpen(!controlCenterOpen)}
           onLogout={onLogout}
+          onStartTour={() => {
+            localStorage.removeItem('portfolioTourCompleted');
+            setShowTour(true);
+          }}
         />
         
         <div className="absolute top-8 sm:top-10 md:top-12 lg:top-16 left-2 sm:left-3 md:left-4 grid grid-cols-1 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4 z-10">

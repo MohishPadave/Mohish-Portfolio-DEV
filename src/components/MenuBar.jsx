@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const MenuBar = ({ onControlCenterClick, onLogout }) => {
+const MenuBar = ({ onControlCenterClick, onLogout, onStartTour }) => {
   const timeRef = useRef(null);
   const [showAppleMenu, setShowAppleMenu] = useState(false);
   const [showFileMenu, setShowFileMenu] = useState(false);
@@ -46,7 +46,7 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
     <>
       {/* Overlay for closing menu */}
       {(showAppleMenu || showFileMenu || showEditMenu || showViewMenu || showGoMenu || showWindowMenu || showHelpMenu) && (
-        <div className="fixed inset-0 z-[110]" onClick={closeAllMenus}></div>
+        <div className="fixed inset-0 z-[40]" onClick={closeAllMenus}></div>
       )}
       
       <div className="absolute top-0 left-0 right-0 h-8 md:h-7 bg-black/30 backdrop-blur-2xl flex items-center justify-between px-6 md:px-8 text-white text-sm md:text-[14px] z-50 select-none">
@@ -66,7 +66,7 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
             
             {/* Apple Menu Dropdown */}
             {showAppleMenu && (
-              <div className="absolute top-full left-0 mt-1 w-60 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[120] text-[13px]">
+              <div className="absolute top-full left-0 mt-1 w-60 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[50] text-[13px]">
                 <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">About This Mac</div>
                 <div className="h-px bg-white/10 my-1.5 mx-1.5"></div>
                 <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">System Preferences...</div>
@@ -77,7 +77,18 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
                 <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Force Quit...</div>
                 <div className="h-px bg-white/10 my-1.5 mx-1.5"></div>
                 <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Sleep</div>
-                <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Restart...</div>
+                <div 
+                  className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    closeAllMenus();
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 100);
+                  }}
+                >
+                  Restart...
+                </div>
                 <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Shut Down...</div>
                 <div className="h-px bg-white/10 my-1.5 mx-1.5"></div>
                 <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Lock Screen</div>
@@ -94,7 +105,7 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
         <div className="relative hidden lg:block">
           <button onClick={() => { closeAllMenus(); setShowFileMenu(true); }} className="hover:bg-white/10 px-2 md:px-3 py-0.5 rounded cursor-pointer">File</button>
           {showFileMenu && (
-            <div className="absolute top-full left-0 mt-1 w-64 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[120] text-[13px]">
+            <div className="absolute top-full left-0 mt-1 w-64 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[50] text-[13px]">
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">New Finder Window</div>
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">New Folder</div>
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">New Folder with Selection</div>
@@ -116,7 +127,7 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
         <div className="relative hidden lg:block">
           <button onClick={() => { closeAllMenus(); setShowEditMenu(true); }} className="hover:bg-white/10 px-2 md:px-3 py-0.5 rounded cursor-pointer">Edit</button>
           {showEditMenu && (
-            <div className="absolute top-full left-0 mt-1 w-56 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[120] text-[13px]">
+            <div className="absolute top-full left-0 mt-1 w-56 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[50] text-[13px]">
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Undo</div>
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Redo</div>
               <div className="h-px bg-white/10 my-1.5 mx-1.5"></div>
@@ -137,7 +148,7 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
         <div className="relative hidden lg:block">
           <button onClick={() => { closeAllMenus(); setShowViewMenu(true); }} className="hover:bg-white/10 px-2 md:px-3 py-0.5 rounded cursor-pointer">View</button>
           {showViewMenu && (
-            <div className="absolute top-full left-0 mt-1 w-64 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[120] text-[13px]">
+            <div className="absolute top-full left-0 mt-1 w-64 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[50] text-[13px]">
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">as Icons</div>
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">as List</div>
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">as Columns</div>
@@ -165,7 +176,7 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
         <div className="relative hidden xl:block">
           <button onClick={() => { closeAllMenus(); setShowGoMenu(true); }} className="hover:bg-white/10 px-2 md:px-3 py-0.5 rounded cursor-pointer">Go</button>
           {showGoMenu && (
-            <div className="absolute top-full left-0 mt-1 w-64 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[120] text-[13px]">
+            <div className="absolute top-full left-0 mt-1 w-64 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[50] text-[13px]">
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Back</div>
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Forward</div>
               <div className="h-px bg-white/10 my-1.5 mx-1.5"></div>
@@ -196,7 +207,7 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
         <div className="relative hidden xl:block">
           <button onClick={() => { closeAllMenus(); setShowWindowMenu(true); }} className="hover:bg-white/10 px-2 md:px-3 py-0.5 rounded cursor-pointer">Window</button>
           {showWindowMenu && (
-            <div className="absolute top-full left-0 mt-1 w-64 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[120] text-[13px]">
+            <div className="absolute top-full left-0 mt-1 w-64 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[50] text-[13px]">
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Minimize</div>
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Zoom</div>
               <div className="h-px bg-white/10 my-1.5 mx-1.5"></div>
@@ -224,7 +235,7 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
         <div className="relative hidden xl:block">
           <button onClick={() => { closeAllMenus(); setShowHelpMenu(true); }} className="hover:bg-white/10 px-2 md:px-3 py-0.5 rounded cursor-pointer">Help</button>
           {showHelpMenu && (
-            <div className="absolute top-full left-0 mt-1 w-72 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[120] text-[13px]">
+            <div className="absolute top-full left-0 mt-1 w-72 bg-gray-800/90 backdrop-blur-2xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-1.5 border border-white/20 animate-fadeIn z-[50] text-[13px]">
               <div className="px-4 py-3 border-b border-white/10">
                 <div className="flex items-center gap-2 bg-gray-600/50 rounded-lg px-3 py-2">
                   <svg className="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -234,7 +245,20 @@ const MenuBar = ({ onControlCenterClick, onLogout }) => {
                 </div>
               </div>
               <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Mac User Guide</div>
-              <div className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150">Tips for Your Mac</div>
+              <div 
+                className="px-4 py-1.5 text-white hover:bg-blue-500/90 cursor-pointer rounded-md mx-1.5 transition-all duration-150"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeAllMenus();
+                  if (onStartTour) {
+                    setTimeout(() => {
+                      onStartTour();
+                    }, 100);
+                  }
+                }}
+              >
+                Tips for Your Mac
+              </div>
             </div>
           )}
         </div>
