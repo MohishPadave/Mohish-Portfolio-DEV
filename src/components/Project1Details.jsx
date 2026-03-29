@@ -30,7 +30,7 @@ const Project1Details = () => {
           
           <div className="w-full md:w-1/2 p-4 flex justify-end">
             <div className="w-full max-w-sm h-64 bg-gray-800 rounded-3xl overflow-hidden shadow-2xl relative">
-              <img src="/assets/images/Projectsss/FTATProject.png" alt="Datacircles B2B Cab System" className="w-full h-full object-cover" />
+              <img src="/assets/images/Projectsss/FTATProject.webp" alt="Datacircles B2B Cab System" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ const Project1Details = () => {
             </div>
 
             <div className="mt-8 border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden">
-              <img src="/assets/images/Projectsss/ftatproblem.jpg" alt="Problem Illustration" className="w-full mix-blend-multiply" />
+              <img src="/assets/images/Projectsss/ftatproblem.webp" alt="Problem Illustration" className="w-full mix-blend-multiply" />
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@ const Project1Details = () => {
             </div>
 
             <div className="mt-8 border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden">
-              <img src="/assets/images/Projectsss/ftatworkflow.png" alt="Role Workflow Architecture" className="w-full mix-blend-multiply" />
+              <img src="/assets/images/Projectsss/ftatworkflow.webp" alt="Role Workflow Architecture" className="w-full mix-blend-multiply" />
             </div>
           </div>
         </div>
@@ -172,7 +172,7 @@ const Project1Details = () => {
             </div>
 
             <div className="mt-8 border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden">
-              <img src="/assets/images/Projectsss/ftattechdiagram.jpg" alt="Technical Diagram" className="w-full mix-blend-multiply" />
+              <img src="/assets/images/Projectsss/ftattechdiagram.webp" alt="Technical Diagram" className="w-full mix-blend-multiply" />
             </div>
           </div>
         </div>
@@ -240,10 +240,10 @@ const Project1Details = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                  <img src="/assets/images/Projectsss/ftatindividualinvoice.png" alt="Individual Invoice Workflow" className="w-full object-contain mix-blend-multiply" />
+                  <img src="/assets/images/Projectsss/ftatindividualinvoice.webp" alt="Individual Invoice Workflow" className="w-full object-contain mix-blend-multiply" />
                 </div>
                 <div className="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                  <img src="/assets/images/Projectsss/ftatmergedinvoice.png" alt="Merged Invoice Workflow" className="w-full object-contain mix-blend-multiply" />
+                  <img src="/assets/images/Projectsss/ftatmergedinvoice.webp" alt="Merged Invoice Workflow" className="w-full object-contain mix-blend-multiply" />
                 </div>
               </div>
 
