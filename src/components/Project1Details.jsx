@@ -62,7 +62,7 @@ const Project1Details = () => {
           
           <div className="px-8 space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-black mb-4">When corporate fleet ops run on <span className="underline decoration-wavy decoration-gray-300">gut feel and paper slips</span></h3>
+              <h3 className="text-2xl font-bold text-black mb-4">When corporate fleet ops run on gut feel and paper slips</h3>
               <p className="text-gray-700 leading-relaxed text-lg max-w-3xl">
                 B2B fleet management is deceptively complex. Every lost paper duty slip is lost revenue. 
                 Every partial payment untracked is an accounting nightmare. Every phone-call booking is a dispatcher's cognitive load.
@@ -126,7 +126,7 @@ const Project1Details = () => {
                 <div key={i} className="bg-gray-50 border border-t-4 border-black border-x-gray-200 border-b-gray-200 p-6 rounded-none">
                   <span className="text-black font-black text-2xl mb-2 opacity-20">{role.tag}</span>
                   <h4 className="font-bold text-black text-xl">{role.title}</h4>
-                  <p className="font-bold text-gray-800 text-sm mb-3 mt-1 underline decoration-gray-300">{role.headline}</p>
+                  <p className="font-bold text-gray-800 text-sm mb-3 mt-1">{role.headline}</p>
                   <p className="text-gray-600 text-sm">{role.desc}</p>
                 </div>
               ))}
